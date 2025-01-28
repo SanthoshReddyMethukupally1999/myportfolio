@@ -1,0 +1,195 @@
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+  rel="stylesheet"
+/>
+<!-- Navigation Bar -->
+<!--
+ Navigation Bar -->
+ <nav class="navbar">
+  <!-- Left: Logo -->
+  <div class="nav-left">
+    <a href="#top" class="logo">
+      <img src="assets/logo.png" alt="Logo">
+    </a>
+  </div>
+
+  <!-- Center: Navigation Links -->
+  <div class="nav-links">
+    <a (click)="scrollTo('top')">Home</a>
+    <a (click)="scrollTo('about')">About Me</a>
+    <a (click)="scrollTo('experience')">Experience</a>
+    <a (click)="scrollTo('projects')">Projects</a>
+    <a (click)="scrollTo('skills')">Skills</a>
+    <a (click)="scrollTo('contact')">Contact</a>
+  </div>
+
+  <!-- Right: Social Media Icons -->
+  <div class="nav-right">
+    <button class="toggle-theme" onclick="toggleTheme()">Toggle Theme</button>
+    <a href="https://www.linkedin.com/in/santhoshreddy13/" target="_blank" class="social-icon">
+      <img src="assets/linkedin.png" alt="LinkedIn">
+    </a>
+    <a href="https://github.com/HappieSanthosh13" target="_blank" class="social-icon">
+      <img src="assets/github.png" alt="GitHub">
+    </a>
+    <a href="https://www.instagram.com/happiereddie/#" target="_blank" class="social-icon">
+      <img src="assets/instagram.png" alt="Instagram">
+    </a>
+  </div>
+</nav>
+
+
+<!-- Sections -->
+<div id="top" class="section home-section">
+  <div class="overlay"></div>
+  <div class="home-content">
+    <h1><span class="typewriter">Welcome to Santhosh's Portfolio</span></h1>
+    <p class="tagline">"shhhh, My common sense is tingling..........."</p>
+    </div>
+</div>
+<div id="about" class="about-section">
+  <div class="about-container">
+    <!-- Left: Profile Photo -->  
+    <div class="about-photo">
+      <img src="assets/profile.JPG" alt="Happie's Profile Photo">
+    </div>
+
+    <!-- Right: About Me Content -->
+    <div class="about-content">
+      <h2>About Me</h2>
+      <p>
+        Hello! I’m <strong class=""typewriter>Santhosh Reddy Methukupally</strong>, a tech enthusiast with a knack for analytical thinking and a love for constant learning. 
+        Born and raised in the vibrant city of <strong>Hyderabad</strong>, I cherish spending time with my family and friends, finding joy in the simple things that bring us closer.
+      </p>
+      <p>
+        When I’m not diving into the world of technology, you’ll likely find me <strong><i class="fas fa-cricket-ball"></i> playing cricket with my friends</strong>, cheering for my favorite team, 
+        <strong>Royal Challengers Bangalore</strong>, or indulging in a good movie. My love for cricket stems from the sheer excitement the game brings, and it’s a passion I carry off the field as well.
+      </p>
+      <p>
+        I’m also a huge fan of <strong>Biryani</strong>—the quintessential Hyderabadi delicacy—and while I enjoy cooking, I’ll admit it’s a work in progress! Beyond the fun, I believe in the power of <strong>spirituality</strong> 
+        and deeply value <strong>equality</strong> in all walks of life.
+      </p>
+      <p>
+        With a <strong>Master’s degree in Computer Science</strong>, I’m constantly driven by the ever-evolving world of technology. I thrive on staying updated and applying my analytical mindset to solve complex problems. 
+        If I were to describe myself with a spiritual animal, it would undoubtedly be a <strong>Panda</strong>—calm, thoughtful, and a fan of life’s simple joys.
+      </p>
+      <a href="#contact" class="btn-contact">Let’s Connect!</a>
+    </div>
+  </div>
+</div>
+
+<div id="experience" class="timeline-section">
+  <h2>Experience</h2>
+  <div class="timeline">
+    <!-- Infosys Experience -->
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <h3>🚀 Software Developer, Infosys Limited</h3>
+        <span>Aug 2021 – July 2022</span>
+        <ul>
+          <li>🎨 Crafted sleek UI components using <strong>Salesforce OmniStudio</strong>.</li>
+          <li>🖗 Partnered with backend wizards to make APIs fly—faster responses guaranteed! 🚀</li>
+          <li>🛠️ Built solid exception handling for underwriting systems (because no one likes errors!).</li>
+          <li>📦 Streamlined code migrations with <strong>IDX Workbench</strong>, <strong>Bitbucket</strong>, and <strong>Git</strong>.</li>
+          <li>⚡ Shaved 15% off sprint cycles by mastering AGILE workflows.</li>
+          <li>✨ Extended system superpowers with <strong>Apex programming</strong>.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Indian Servers Experience -->
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <h3>🌐 Software Developer, Indian Servers</h3>
+        <span>May 2020 – May 2021</span>
+        <ul>
+          <li>🧩 Designed snappy API endpoints and hooked them up to <strong>React.js</strong> apps.</li>
+          <li>🌈 Ensured accessibility so everyone gets a seamless experience.</li>
+          <li>🚀 Automated CI/CD pipelines with <strong>AWS Elastic Beanstalk</strong>, cutting deployment errors.</li>
+          <li>🔒 Locked down user services with token-based authentication. 🛡️</li>
+          <li>📊 Built real-time dashboards—actionable insights at a glance! 👨‍💻</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="projects"class="projects-section">
+  <div class="project-tile" *ngFor="let project of projects" (click)="toggleDetails(project)">
+    <img [src]="project.image" alt="{{ project.title }}" />
+    <h3>{{ project.title }}</h3>
+    <p>{{ project.shortDescription }}</p>
+  </div>
+</div>
+
+<div class="project-expanded" *ngIf="selectedProject">
+  <div class="expanded-content">
+    <button class="close-btn" (click)="closeDetails()">×</button>
+    <img [src]="selectedProject.image" alt="{{ selectedProject.title }}" class="expanded-image" />
+    <h2>{{ selectedProject.title }}</h2>
+    <p>{{ selectedProject.description }}</p>
+    <h4>Tech Stack:</h4>
+    <p>{{ selectedProject.techStack }}</p>
+  </div>
+</div>
+
+<div id="skills" class="skills-container">
+  <div class="skill-category" *ngFor="let skill of skills">
+    <h3>{{ skill.category }}</h3>
+    <div class="skill-icons">
+      <div class="skill-icon" *ngFor="let tech of skill.skills">
+        <i [class]="tech.icon"></i>
+        <p>{{ tech.name }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="contact" class="contact-section">
+  <div class="background">
+    <div class="container">
+      <div class="screen">
+        <div class="screen-header">
+          <div class="screen-header-left">
+            <div class="screen-header-button close"></div>
+            <div class="screen-header-button maximize"></div>
+            <div class="screen-header-button minimize"></div>
+          </div>
+          <div class="screen-header-right">
+            <div class="screen-header-ellipsis"></div>
+            <div class="screen-header-ellipsis"></div>
+            <div class="screen-header-ellipsis"></div>
+          </div>
+        </div>
+        <div class="screen-body">
+          <div class="screen-body-item left">
+            <div class="app-title">
+              <span>CONTACT</span>
+            </div>
+          </div>
+          <div class="screen-body-item">
+            <div class="app-form">
+              <div class="app-form-group">
+                <input class="app-form-control" placeholder="NAME" [(ngModel)]="contactForm.name">
+              </div>
+              <div class="app-form-group">
+                <input class="app-form-control" placeholder="EMAIL" [(ngModel)]="contactForm.email">
+              </div>
+              <div class="app-form-group">
+                <input class="app-form-control" placeholder="CONTACT NO" [(ngModel)]="contactForm.phone">
+              </div>
+              <div class="app-form-group message">
+                <input class="app-form-control" placeholder="MESSAGE" [(ngModel)]="contactForm.message">
+              </div>
+              <div class="app-form-group buttons">
+                <button class="app-form-button" (click)="cancelForm()">CANCEL</button>
+                <button class="app-form-button" (click)="submitForm()">SEND</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
