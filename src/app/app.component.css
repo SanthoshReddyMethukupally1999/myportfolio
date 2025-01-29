@@ -4,8 +4,6 @@ body, html {
   font-family: sans-serif;
   scroll-behavior: smooth;
 }
-
-/* Add theme-specific colors */
 :root {
   --bg-light: #ffffff;
   --text-light: #000000;
@@ -13,49 +11,50 @@ body, html {
   --text-dark: #ffffff;
 }
 
+/* Light Mode */
 [data-theme="light"] {
   background-color: var(--bg-light);
   color: var(--text-light);
 }
 
+/* Dark Mode */
 [data-theme="dark"] {
   background-color: var(--bg-dark);
   color: var(--text-dark);
 }
-
-/* Navbar */
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 80px;
-  background: transparent;
+  height: 60px;
+  background: rgba(0, 0, 0, 0.8);
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
-  z-index: 999;
-  box-sizing: border-box;
+  z-index: 1000;
 }
 
+/* Navbar Logo */
 .nav-left .logo img {
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
   object-fit: cover;
 }
 
+/* Navigation Links */
 .nav-links {
   display: flex;
-  justify-content: left;
+  justify-content: center;
   gap: 20px;
 }
 
 .nav-links a {
   text-decoration: none;
-  color: inherit;
-  font-size: 1.2rem;
+  color: white;
+  font-size: 1rem;
   font-weight: bold;
   transition: color 0.3s;
 }
@@ -64,9 +63,64 @@ body, html {
   color: #007bff;
 }
 
+/* Mobile Responsive Navbar with Toggle */
+.menu-toggle {
+  display: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: none;
+  }
+
+  .nav-links.show {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+  }
+}
+
+/* Home Section Responsive Fix */
+.home-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  text-align: center;
+  color: white;
+  background: url('/assets/code-background.gif') no-repeat center center/cover;
+  padding: 20px;
+}
+
+.home-section h1 {
+  font-size: 4rem;
+}
+
+@media (max-width: 768px) {
+  .home-section h1 {
+    font-size: 2rem;
+  }
+}
+
+/* Social Media Icons Fix */
 .nav-right {
   display: flex;
-  gap: 15px;
+  gap: 10px;
   align-items: center;
 }
 
@@ -80,95 +134,294 @@ body, html {
   transform: scale(1.2);
 }
 
-.toggle-theme {
-  cursor: pointer;
-  padding: 10px;
-  border: 1px solid;
-  border-radius: 5px;
-  background: transparent;
-  color: inherit;
+
+/* Add theme-specific colors */
+:root {
+  --bg-light: #ffffff;
+  --text-light: #000000;
+  --bg-dark: #121212;
+  --text-dark: #ffffff;
+
+  /* Section-specific variables */
+  --about-bg-light: #f5f5f5;
+  --about-bg-dark: #1a1a1a;
+  --experience-bg-light: #e3f2fd;
+  --experience-bg-dark: #1e293b;
+  --section-text-light: #333333;
+  --section-text-dark: #e0e0e0;
 }
 
-/* Responsive Navbar */
-@media (max-width: 768px) {
-  .nav-links {
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-  }
-
-  .nav-right {
-      flex-direction: column;
-      gap: 10px;
-  }
+[data-theme="light"] {
+  background-color: var(--bg-light);
+  color: var(--text-light);
 }
 
-/* Sections */
-.section {
-  padding: 60px 20px;
+[data-theme="dark"] {
+  background-color: var(--bg-dark);
+  color: var(--text-dark);
 }
 
+/* Home Section */
 .home-section {
-  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 100vh;
+  position: relative;
   text-align: center;
-  color: inherit;
+  color: white;
+  background: url('/assets/code-background.gif') no-repeat center center/cover;
 }
 
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+}
+/* Typewriter Effect */
+.typewriter {
+  display: inline-flex;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 4px solid #fff; /* Simulate cursor */
+  animation: typing 4s steps(40, end), blink 0.7s step-end infinite;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+
+/* Tagline Styling */
+.tagline {
+  display: flex;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+ @media (max-width: 768px) {
+  .home-section {
+    font-size: 6vw; /* Increase size for smaller screens */
+    white-space: normal; /* Allow wrapping */
+  }
+  .typewriter{
+    font-size: 6vw; /* Increase size for smaller screens */
+    white-space: none; /* Allow wrapping */
+  }
+  .tagline{
+    font-size:6vw;
+  }
+}
+
+/* About Section */
 .about-section {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
-  text-align: left;
-  gap: 30px;
+  min-height: 100vh;
+  background: var(--about-bg-light);
+  color: var(--section-text-light);
+  font-family: "Gotham";
+  padding: 0 20px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+[data-theme="dark"] .about-section {
+  background: var(--about-bg-dark);
+  color: var(--section-text-dark);
+}
+
+/* Container for Photo and Content */
+.about-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 30px;
+  max-width: 1200px;
+  width: 100%;
+}
+
+/* Profile Photo */
+.about-photo {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
 .about-photo img {
   width: 250px;
-  height: 250px;
-  border-radius: 50%;
+  height: 300px;
   object-fit: cover;
-  transition: transform 0.3s;
+  transition: transform 0.3s ease-in-out;
 }
-
-.about-photo img:hover {
-  transform: scale(1.1);
-}
-
+/* About Content */
 .about-content {
-  max-width: 600px;
+  flex: 2;
+  max-width: 700px;
+  text-align: left;
 }
 
 .about-content h2 {
   font-size: 2.5rem;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+  color: #080803;
+  font-family: 'Gotham';
 }
 
 .about-content p {
-  line-height: 1.6;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 15px;
 }
 
 .btn-contact {
   display: inline-block;
   padding: 10px 20px;
-  background: #007bff;
+  font-family: 'Indie Flower';
+  background: linear-gradient(135deg, transparent);
   color: white;
   text-decoration: none;
   border-radius: 5px;
-  transition: background 0.3s;
+  border-color: rgb(110, 0, 0);
+  transition: background 0.3s ease;
 }
 
 .btn-contact:hover {
-  background: #0056b3;
+  background: linear-gradient(135deg, transparent, #0c0c0c);
 }
 
-/* Projects Section */
+/* Experience Section */
+/* Experience Section - Full Screen */
+.experience-section {
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+  align-items: center;
+  flex-direction: flex;
+  min-height: 100vh;
+  width: 100%;
+  background: var(--experience-bg-light);
+  color: var(--section-text-light);
+  text-align: center;
+  font-family: 'Gotham', sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark Mode for Experience Section */
+[data-theme="dark"] .experience-section {
+  background: var(--experience-bg-dark);
+  color: var(--section-text-dark);
+}
+
+/* Experience Section Heading */
+.experience-section h2 {
+  font-size: 2.5rem;
+  color: black;
+  margin-bottom: 20px;
+  font-family: 'Gotham', sans-serif;
+}
+
+/* Timeline Adjustments */
+.timeline {
+  max-width: 100%;
+  width: 100%;
+  padding: 20px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Individual Timeline Item */
+.timeline-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
+}
+
+.timeline-item:hover {
+  transform: scale(1.02);
+}
+
+/* Timeline Bullet */
+.timeline-item:before {
+  content: "🔹";
+  font-size: 1.5rem;
+  margin-right: 15px;
+}
+
+/* Responsive Design for Experience Section */
+@media (max-width: 768px) {
+  .experience-section {
+    padding: 40px 20px;
+    text-align: center;
+    min-height: auto;
+  }
+
+  .timeline {
+    width: 100%;
+  }
+
+  .timeline-item {
+    flex-direction: flex;
+    text-align: center;
+    padding: 15px;
+  }
+
+  .timeline-item:before {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+}
+
+/* Responsive Design for About Section */
+@media (max-width: 768px) {
+  .about-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .about-photo img {
+    width: 200px;
+  }
+
+  .about-content {
+    text-align: center;
+    padding: 0 15px;
+  }
+
+  .about-content h2 {
+    font-size: 2rem;
+  }
+
+  .about-content p {
+    font-size: 1rem;
+  }
+}
+
+
 .projects-section {
   display: flex;
   flex-wrap: wrap;
+  text-align:center;
   max-width:100%;
   justify-content: center;
   gap: 20px;
@@ -242,21 +495,25 @@ body, html {
 
 /* Skills Section */
 .skills-section {
-  display: flex;
-  max-width: 100%;
+  display: inline-flex;
   flex-wrap: wrap;
-  gap: 20px;
+  flex-direction: row;
   justify-content: center;
-  padding: 20px;
+  align-items: center;
+  gap: 20px;
+  padding: 40px;
+  width: 100%;
+  text-align: center;
 }
 
+/* Skill Category Styling */
 .skill-category {
   background: #f9f9f9;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  width: 200px;
+  width: 100%;
+  max-width: auto;
 }
 
 .skill-category h3 {
@@ -264,27 +521,31 @@ body, html {
   margin-bottom: 10px;
 }
 
+/* Grid Layout for Skills */
 .skill-icons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  display: grid;
+  max-width: auto;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 15px;
   justify-content: center;
+  padding: 10px;
 }
 
+/* Individual Skill Item */
 .skill-icon {
   background: white;
   padding: 15px;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  width: 80px;
   text-align: center;
-  transition: transform 0.3s;
+  transition: transform 0.3s ease;
 }
 
 .skill-icon:hover {
   transform: scale(1.1);
 }
 
+/* Skill Icon Styling */
 .skill-icon i {
   font-size: 2rem;
   margin-bottom: 10px;
@@ -294,6 +555,17 @@ body, html {
 .skill-icon p {
   font-size: 0.9rem;
   color: #333;
+}
+
+/* Responsive Fix */
+@media (max-width: 768px) {
+  .skills-section{
+    padding: 20px;
+    min-height: fit-content;
+  }
+  .skill-icons {
+    grid-template-columns: repeat(2, minmax(100px, 1fr));
+  }
 }
 
 *, *:before, *:after {
@@ -531,4 +803,3 @@ body, button, input {
     padding: 0;
   }
 }
-

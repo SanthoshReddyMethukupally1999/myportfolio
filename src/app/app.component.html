@@ -25,7 +25,7 @@
 
   <!-- Right: Social Media Icons -->
   <div class="nav-right">
-    <button class="toggle-theme" onclick="toggleTheme()">Toggle Theme</button>
+    <button class="toggle-theme" onclick="toggleTheme()">click here</button>
     <a href="https://www.linkedin.com/in/santhoshreddy13/" target="_blank" class="social-icon">
       <img src="assets/linkedin.png" alt="LinkedIn">
     </a>
@@ -79,7 +79,7 @@
 </div>
 
 <div id="experience" class="timeline-section">
-  <h2>Experience</h2>
+  <div class="about-container"><h2>Experience</h2></div>
   <div class="timeline">
     <!-- Infosys Experience -->
     <div class="timeline-item">
@@ -114,12 +114,14 @@
   </div>
 </div>
 <div id="projects"class="projects-section">
+  <div class="about-container"><h2>Projects</h2></div>
   <div class="project-tile" *ngFor="let project of projects" (click)="toggleDetails(project)">
     <img [src]="project.image" alt="{{ project.title }}" />
     <h3>{{ project.title }}</h3>
     <p>{{ project.shortDescription }}</p>
   </div>
 </div>
+
 
 <div class="project-expanded" *ngIf="selectedProject">
   <div class="expanded-content">
@@ -131,6 +133,7 @@
     <p>{{ selectedProject.techStack }}</p>
   </div>
 </div>
+
 
 <div id="skills" class="skills-container">
   <div class="skill-category" *ngFor="let skill of skills">

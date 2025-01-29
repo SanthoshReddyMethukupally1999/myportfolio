@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import {CommonModule} from '@angular/common';
+import { Component, OnInit, PLATFORM_ID, Inject } from '@angular/core';
+import {CommonModule, isPlatformBrowser} from '@angular/common';
 import{FormsModule}from '@angular/forms'
 // Correctly define routes with "pathMatch"
 @Component({
@@ -11,23 +11,28 @@ import{FormsModule}from '@angular/forms'
 })
 export class AppComponent {
   title = 'my-portfolio';
-  isDarkMode = false; // Default mode is Light
+  isDarkMode: boolean = false; // Default mode is Light
 
-  toggleTheme() {
-    if (typeof window !== 'undefined') {
-      this.isDarkMode = !this.isDarkMode;
-      const theme = this.isDarkMode ? 'dark' : 'light';
-      document.documentElement.setAttribute('data-theme', theme);
-      localStorage.setItem('theme', theme); // Save user preference
-    }
-  }
+  constructor(@Inject(PLATFORM_ID) private platformId: object) {}
 
-  // OnInit Lifecycle Hook
   ngOnInit() {
-    if (typeof window !== 'undefined') {
+    // Ensure we are running in the browser before accessing localStorage
+    if (isPlatformBrowser(this.platformId)) {
       const savedTheme = localStorage.getItem('theme') || 'light';
       this.isDarkMode = savedTheme === 'dark';
       document.documentElement.setAttribute('data-theme', savedTheme);
+
+      // Expose toggleTheme globally for onclick event in HTML
+      (window as any).toggleTheme = this.toggleTheme.bind(this);
+    }
+  }
+
+  toggleTheme() {
+    if (isPlatformBrowser(this.platformId)) {
+      this.isDarkMode = !this.isDarkMode;
+      const theme = this.isDarkMode ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
     }
   }
   // Scroll to specific section
